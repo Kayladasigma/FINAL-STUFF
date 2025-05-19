@@ -3,8 +3,9 @@ import React, { useEffect, useState } from "react";
 import { initializeApp } from "firebase/app";
 import { getFirestore, doc, setDoc, getDoc, collection, getDocs } from "firebase/firestore";
 import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged } from "firebase/auth";
-const firebaseConfig = {apiKey: "YOUR_API_KEY", authDomain: "YOUR_PROJECT_ID.firebaseapp.com", projectId: "YOUR_PROJECT_ID", 
-                        storageBucket: "YOUR_PROJECT_ID.appspot.com", messagingSenderId: "YOUR_SENDER_ID", appId: "YOUR_APP_ID"};
+const firebaseConfig = {apiKey: "AIzaSyDMLaqX1UF79jjiUO-OPvQvDzYgU0WbRco", authDomain: "final-project-d153d.firebaseapp.com", projectId: "final-project-d153d",
+                        storageBucket: "final-project-d153d.firebasestorage.app", messagingSenderId: "859737187223",
+                        appId: "1:859737187223:web:69a47f075cea954cc55ad2"};
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
