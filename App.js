@@ -3,10 +3,9 @@ import { initializeApp } from "firebase/app";
 import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
 import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged } from "firebase/auth";
 
-const firebaseConfig = {
+const firebaseConfig = { 
   apiKey: "AIzaSyDMLaqX1UF79jjiUO-OPvQvDzYgU0WbRco",
   authDomain: "final-project-d153d.firebaseapp.com",
-  projectId: "final-project-d153d",
   storageBucket: "final-project-d153d.firebasestorage.app",
   messagingSenderId: "859737187223",
   appId: "1:859737187223:web:69a47f075cea954cc55ad2",
