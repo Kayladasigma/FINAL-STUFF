@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { initializeApp } from "firebase/app";
 import { getFirestore, doc, setDoc, getDoc, collection, getDocs } from "firebase/firestore";
@@ -16,7 +15,8 @@ export default function App() {
   const [voted, setVoted] = useState(false);
   const [vote, setVote] = useState(null);
   const [voteStats, setVoteStats] = useState({ yes: 0, no: 0, voters: [] });
-  useEffect(() => {
+  useEffect(() => 
+  {
     onAuthStateChanged(auth, (currentUser) => 
       {
         setUser(currentUser);
@@ -24,29 +24,33 @@ export default function App() {
       }
     );
   }, []);
-  useEffect(() => {
-    const interval = setInterval(() => {
-      fetchVotes();
-    }, 300000); // every 5 mins
+  useEffect(() => 
+  {
+    const interval = setInterval(() => 
+    {fetchVotes();}, 300000); // every 5 mins
     fetchVotes(); // initial fetch
     return () => clearInterval(interval);
   }, []);
-  const signIn = async () => {
+  const signIn = async () =>
+  {
     try {
       await signInWithPopup(auth, provider);
     } catch (err) {
       console.error(err);
     }
   };
-  const checkIfVoted = async (uid) => {
+  const checkIfVoted = async (uid) => 
+  {
     const docRef = doc(db, "votes", getTodayDate());
     const docSnap = await getDoc(docRef);
-    if (docSnap.exists() && docSnap.data()[uid]) {
+    if (docSnap.exists() && docSnap.data()[uid]) 
+    {
       setVoted(true);
       setVote(docSnap.data()[uid].vote);
     }
   };
-  const castVote = async (choice) => {
+  const castVote = async (choice) => 
+  {
     if (!user) return;
     const today = getTodayDate();
     const voteRef = doc(db, "votes", today);
@@ -54,8 +58,8 @@ export default function App() {
     if (docSnap.exists() && docSnap.data()[user.uid]) {
       alert("You already voted today!");
       return;
-    }
-    await setDoc(
+  }
+  await setDoc(
       voteRef,
       {[user.uid]: 
         {
@@ -87,14 +91,13 @@ export default function App() {
         });
     }
   };
-
   return (
     <div className="p-6 font-sans text-center">
       <h1 className="text-3xl font-bold mb-4">Vote Now!</h1>
-      {!user ? (button onClick={signIn} className="bg-blue-500 text-white px-4 py-2 rounded"> Sign in with Google </button>):
+      {!user ? (<button onClick={signIn} className="bg-blue-500 text-white px-4 py-2 rounded"> Sign in with Google </button>):
         (<div>
           <p className="mb-4">Hello, {user.displayName}!</p>
-          {voted ? (<p className="text-green-600">You voted "{vote}" today ✅</p>):(
+          {voted ? (<p className="text-green-600">You voted "{vote}" today.</p>):(
             <div>
               <p className="mb-2">Should we add hot chocolate machines to the school?</p>
               <button onClick={() => castVote("yes")} className="bg-green-500 text-white px-4 py-2 m-2 rounded"> Yes </button>
@@ -114,7 +117,7 @@ export default function App() {
             <ul className="text-left max-w-md mx-auto">
               {voteStats.voters.map((v) => (
                 <li key={v.uid}>
-                  🧑 {v.name}: {v.vote} ({new Date(v.timestamp).toLocaleTimeString()})
+                  {v.name}: {v.vote} ({new Date(v.timestamp).toLocaleTimeString()})
                 </li>
               ))}
             </ul>
